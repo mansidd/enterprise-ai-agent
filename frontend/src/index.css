@@ -1,0 +1,38 @@
+body { margin: 0; font-family: system-ui, sans-serif; }
+
+/* Styles for TextBox component */
+.text-box-container {
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 100%; /* Take full width of parent */
+  max-width: 300px; /* Optional: limit max width for better form presentation */
+}
+
+.text-box-label {
+  font-size: 0.9em;
+  color: #333;
+  font-weight: 500;
+}
+
+.text-box-input {
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1em;
+  line-height: 1.5;
+  color: #333;
+  width: 100%;
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+.text-box-input::placeholder {
+  color: #999;
+}
+
+.text-box-input:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+}
