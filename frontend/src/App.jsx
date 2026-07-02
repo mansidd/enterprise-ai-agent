@@ -1,40 +1,25 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { AuthProvider, useAuth } from "./context/AuthContext";
-import Login from "./pages/Login";
-
-function PrivateRoute({ children }) {
-  const { token, loading } = useAuth();
-  if (loading) return <p>Loading...</p>;
-  return token ? children : <Navigate to="/login" replace />;
-}
-
-function Dashboard() {
-  const { user, logout } = useAuth();
-  return (
-    <div style={{ padding: "2rem" }}>
-      <h1>Welcome{user?.full_name ? `, ${user.full_name}` : ""}</h1>
-      <button onClick={logout}>Log out</button>
-    </div>
-  );
-}
+import React, { useState } from 'react';
+import Dashboard from "./pages/Dashboard";
+import TextBox from "./components/TextBox";
 
 export default function App() {
+  const [inputValue, setInputValue] = useState('');
+
   return (
-    <AuthProvider>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route
-            path="/dashboard"
-            element={
-              <PrivateRoute>
-                <Dashboard />
-              </PrivateRoute>
-            }
-          />
-          <Route path="*" element={<Navigate to="/login" replace />} />
-        </Routes>
-      </BrowserRouter>
-    </AuthProvider>
+    <>
+      <Dashboard />
+      <div style={{ padding: '20px', maxWidth: '600px', margin: '20px auto', border: '1px solid #eee', borderRadius: '8px', backgroundColor: '#f9f9f9' }}>
+        <h2>Text Box Component Demonstration</h2>
+        <p>This is a demonstration of the new reusable <code>TextBox</code> component.</p>
+        <TextBox
+          id="nameInput"
+          label="Your Name"
+          placeholder="Enter your full name"
+          value={inputValue}
+          onChange={(e) => setInputValue(e.target.value)}
+        />
+        <p>You typed: <strong>{inputValue}</strong></p>
+      </div>
+    </>
   );
 }
